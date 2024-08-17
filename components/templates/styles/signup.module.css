@@ -1,0 +1,59 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+}
+.container form{
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container form h2{
+    font-family: "vazirmatn";
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 5px 0;
+}
+.inputs{
+    width: 100%;
+    border-bottom: 2px solid var(--first-color);
+    margin: 10px 0;
+}
+.inputs input
+{
+    width: 90%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+}
+.inputs button
+{
+    background-color: transparent;
+    border: none;
+}
+.container form p a{
+    color: var(--first-color);
+    transition: all 0.5s ease-in;
+}
+.container form p a:hover{
+    opacity: 0.5;
+}
+.submitBut
+{
+    width: 80%;
+    margin: 20px 0;
+    background-color: var(--first-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease-in;
+}
+.submitBut:hover{
+    opacity: 0.5;
+}
