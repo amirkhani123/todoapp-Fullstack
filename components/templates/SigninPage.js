@@ -5,16 +5,16 @@ import { BsEyeSlashFill } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { RxAvatar } from "react-icons/rx";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
-function SignupPage() {
+
+function SignIn() {
   const [show, setShow] = useState(false);
   const { status } = useSession();
   const router = useRouter();
   const [formValue, setFormValue] = useState({
     userName: "",
     password: "",
-    repassword: "",
   });
   useEffect(() => {
     if (status === "authenticated") router.replace("/");
@@ -24,33 +24,21 @@ function SignupPage() {
   };
   const creteUserHandeler = async (e) => {
     e.preventDefault();
-    if (formValue.password !== formValue.repassword) {
-      return alert("کلمه عبور با تکرار کلمه عبور متفاوت است");
-    }
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        userName: formValue.userName,
-        password: formValue.password,
-      }),
-      headers: { "Content-Type": "application/json" },
+    const res = await signIn("credentials", {
+      userName: formValue.userName,
+      password: formValue.password,
+      redirect: false,
     });
-    const result = await res.json();
-    if (result.status === "success") {
-      toast.success("حساب کاربری ساخته شد 😀");
-      router.replace("/auth/signin");
-      router.replace("/sighin");
-    } else if (result.status === "existing") {
-      toast.error("نام کاربری در دیتا بیس وجود دارد 😒");
-    } else {
-      toast.error("حساب کاربری ساخته نشد 😒");
+    if (!res.error) {
+      router.replace("/");
+      toast.success("خوش آمدید 👋🏻");
     }
   };
   return (
     <div className={styles.container}>
       <form onSubmit={creteUserHandeler}>
         <RxAvatar size={"55px"} color="#4361ee" />
-        <h2>ساخت حساب کاربری</h2>
+        <h2>ورود به حساب کاربری</h2>
         <div className={styles.inputs}>
           <input
             type="userName"
@@ -79,27 +67,13 @@ function SignupPage() {
             {!show ? <IoEyeSharp /> : <BsEyeSlashFill />}
           </button>
         </div>
-        <div className={styles.inputs}>
-          <input
-            type={show ? "text" : "password"}
-            placeholder="تکرار کلمه عبور ..."
-            value={formValue.repassword}
-            onChange={changeHandeler}
-            name="repassword"
-            required
-          />
-        </div>
         <p>
-          اکانت دارید؟ <Link href="/auth/signin">ورود به حساب کاربری</Link>
+          آیا اکانت ندارید ؟ <Link href="/auth/signup">ساخت اکانت</Link>
         </p>
-        <input
-          type="submit"
-          value="ساخت حساب کاربری"
-          className={styles.submitBut}
-        />
+        <input type="submit" value="ورورد" className={styles.submitBut} />
       </form>
     </div>
   );
 }
 
-export default SignupPage;
+export default SignIn;

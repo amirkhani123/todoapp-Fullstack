@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     await userModels.create({ userName: userName, password: passwordHashed });
     return res
       .status(200)
-      .json({ status: "status", message: "user created successfully" });
+      .json({ status: "success", message: "user created successfully" });
   } catch (error) {
     return res
       .status(422)
