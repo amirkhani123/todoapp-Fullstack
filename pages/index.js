@@ -1,7 +1,9 @@
+import IndexPage from "../components/templates/IndexPage";
+
 export default function Home() {
   return (
     <div>
-      <h1> کارها</h1>
+      <IndexPage />
     </div>
   );
 }

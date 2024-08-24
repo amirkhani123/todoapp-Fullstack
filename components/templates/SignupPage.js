@@ -5,11 +5,9 @@ import { BsEyeSlashFill } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { RxAvatar } from "react-icons/rx";
-import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 function SignupPage() {
   const [show, setShow] = useState(false);
-  const { status } = useSession();
   const router = useRouter();
   const [formValue, setFormValue] = useState({
     userName: "",
@@ -17,15 +15,21 @@ function SignupPage() {
     repassword: "",
   });
   useEffect(() => {
-    if (status === "authenticated") router.replace("/");
-  }, [status]);
+    fetch("/api/user")
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success") {
+          router.replace("/");
+        }
+      });
+  }, []);
   const changeHandeler = (e) => {
     setFormValue((form) => ({ ...form, [e.target.name]: e.target.value }));
   };
   const creteUserHandeler = async (e) => {
     e.preventDefault();
     if (formValue.password !== formValue.repassword) {
-      return alert("کلمه عبور با تکرار کلمه عبور متفاوت است");
+      return toast.error("کلمه عبور با تکرار کلمه عبور متفاوت است");
     }
     const res = await fetch("/api/auth/signup", {
       method: "POST",
@@ -39,7 +43,6 @@ function SignupPage() {
     if (result.status === "success") {
       toast.success("حساب کاربری ساخته شد 😀");
       router.replace("/auth/signin");
-      router.replace("/sighin");
     } else if (result.status === "existing") {
       toast.error("نام کاربری در دیتا بیس وجود دارد 😒");
     } else {
@@ -58,6 +61,7 @@ function SignupPage() {
             value={formValue.userName}
             name="userName"
             onChange={changeHandeler}
+            minLength={5}
             required
           />
         </div>
@@ -68,6 +72,7 @@ function SignupPage() {
             value={formValue.password}
             onChange={changeHandeler}
             name="password"
+            minLength={8}
             required
           />
           <button
