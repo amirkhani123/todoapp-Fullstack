@@ -38,7 +38,7 @@ function SignIn() {
     });
     const result = await res.json();
     if (result.status === "success") {
-      router.replace("/");
+      router.reload();
       toast.success("خوش آمدید 👋🏻");
     } else if (res.status === "existing") {
       toast.error("نام کاربری یافت نشد 🥲");

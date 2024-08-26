@@ -1,0 +1,62 @@
+.card{
+    display: flex;
+    margin: 8px 10px;
+    box-shadow: 1px 1px 5px  rgb(206, 206, 206);
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 10px;
+    gap: 5px;
+}
+.card span
+{
+    display: inline-block;
+    width: 50%;
+    height: 2px;
+}
+.todo{
+  background-color: var(--secondary-color);;
+}
+.inProgress {
+    background-color: var( --success-color);
+}
+.review {
+    background-color: var( --first-color);
+}
+.done {
+    background-color: var(--done-color);
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px;
+}
+.buttons button
+{
+    width:90px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:  2px;
+    gap:3px;
+    border-radius: 10px;
+    color: #ffffff;
+    transition: all 0.5s ease-in;
+}
+.back{
+    background-color: var(--error-color);
+}
+.next{
+   background-color: var(--success-color);
+}
+.next:hover{
+    color: var(--success-color);
+    background-color: #ffffff;
+    border: 1px solid var(--success-color);
+}
+.back:hover{
+    color: var(--error-color);
+    background-color: #ffffff;
+    border: 1px solid var(--error-color);
+}

@@ -1,0 +1,73 @@
+.not_signin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(100vh - 300px );
+
+}
+.not_signin h2{
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: "vazirmatn";
+}
+.not_signin p{
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: "vazirmatn";
+}
+.not_signin a
+{
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-family: "vazirmatn";
+    color: var(--first-color);
+}
+.container{
+   
+    margin: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.container >div{
+    min-height: 250px;
+    min-width: 280px;
+    background-color: #ffffff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.container > div p{
+  width: 100%;
+  text-align: center;
+  padding: 5px ;
+  color: #ffffff;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-family: "vazirmatn";
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.todo p{
+    background-color: var(--secondary-color);
+}
+.inProgress p{
+    background-color: var( --success-color);
+}
+.review p{
+    background-color: var( --first-color);
+}
+.done p{
+    background-color: var(--done-color);
+}
+.container h5
+{
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: "vazirmatn";
+    text-align: center;
+    width: 100%;
+    margin-top: 200px;
+}

@@ -1,0 +1,28 @@
+.container label{
+   display: block;
+   margin: 5px;
+}
+.container label span{
+   color: red;
+}
+.container input
+{
+    display: block;
+    width: 250px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 3px;
+    box-shadow: 1px 1px 15px rgb(225, 225, 225);
+}
+.submit{
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: var(--success-color);
+    color: #ffffff;
+    transition: all 0.5s ease-in;
+}
+.submit:hover{
+    color: var(--success-color);
+    background-color: #ffffff;
+}
