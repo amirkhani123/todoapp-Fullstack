@@ -2,11 +2,21 @@ import Link from "next/link";
 import styles from "./layout.module.css";
 import { CiCircleList, CiLogin, CiLogout } from "react-icons/ci";
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { RxDashboard } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { RxDashboard, RxHamburgerMenu } from "react-icons/rx";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 function Layout({ children }) {
+  const [isMenu, setIsMenu] = useState(false);
+  const menu = useRef();
+  const menuHandeler = () => {
+    setIsMenu(!isMenu);
+    if (isMenu) {
+      menu.current.style.display = "block";
+    } else {
+      menu.current.style.display = "none";
+    }
+  };
   const router = useRouter();
   const signOutHandeler = async () => {
     const res = await fetch("/api/auth/signout");
@@ -27,20 +37,34 @@ function Layout({ children }) {
   return (
     <div className={styles.container}>
       <header>
-        <p>برنامه مدریت کارهای روزانه</p>
-        {isSignin ? (
-          <button onClick={signOutHandeler} className={styles.signout}>
-            خروج <CiLogout />
+        <div className={styles.menu}>
+          <p>برنامه مدریت کارهای روزانه</p>
+          <button
+            onClick={menuHandeler}
+            style={{
+              backgroundColor: "transparent",
+              border: "none",
+              color: "#ffffff",
+            }}
+          >
+            <RxHamburgerMenu size={45} />
           </button>
-        ) : (
-          <Link href="/auth/signin" className={styles.signin}>
-            ورود 
-          <CiLogin size={25} />
-          </Link>
-        )}
+        </div>
+        <div>
+          {isSignin ? (
+            <button onClick={signOutHandeler} className={styles.signout}>
+              خروج <CiLogout />
+            </button>
+          ) : (
+            <Link href="/auth/signin" className={styles.signin}>
+              ورود
+              <CiLogin size={25} />
+            </Link>
+          )}
+        </div>
       </header>
       <div className={styles.subContainer}>
-        <aside className={styles.aside}>
+        <aside className={styles.aside} ref={menu}>
           <p>خوش آمدید 👋🏻</p>
           <ul>
             <li>
@@ -49,11 +73,11 @@ function Layout({ children }) {
             </li>
             <li>
               <BiMessageSquareAdd />
-              <Link href="add-todo">اضافه کردن کار جدید</Link>
+              <Link href="/add-todo">اضافه کردن کار جدید</Link>
             </li>
             <li>
               <RxDashboard />
-              <Link href="profile">حساب کاربری</Link>
+              <Link href="/profile">حساب کاربری</Link>
             </li>
           </ul>
         </aside>

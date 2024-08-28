@@ -17,6 +17,20 @@ function Tasks({ data, next, back, fetchData }) {
       toast.error("ارتباط برقرار نشد🥲");
     }
   };
+  const deleteHandler = async (id) => {
+    const res = await fetch("/api/todo", {
+      method: "DELETE",
+      body: JSON.stringify({ id }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await res.json();
+    if (result.status === "success") {
+      toast.success("با موفقیت پاک شد 😀");
+      fetchData();
+    } else {
+      toast.error("در برقراری ارتباط مشکلی به وجود آمده است 🥲");
+    }
+  };
   return (
     <div>
       {data?.map((todo) => {
@@ -39,15 +53,28 @@ function Tasks({ data, next, back, fetchData }) {
             <h4>{todo.title}</h4>
             <div className={styles.buttons}>
               {back && (
-                <button onClick={() => changeHandeler(todo._id, back)} className={styles.back}>
-                  <FaArrowAltCircleRight  />
+                <button
+                  onClick={() => changeHandeler(todo._id, back)}
+                  className={styles.back}
+                >
+                  <FaArrowAltCircleRight />
                   برگشت
                 </button>
               )}
-              {next && (
-                <button onClick={() => changeHandeler(todo._id, next)} className={styles.next}>
+              {next ? (
+                <button
+                  onClick={() => changeHandeler(todo._id, next)}
+                  className={styles.next}
+                >
                   بعدی
                   <FaArrowAltCircleLeft />
+                </button>
+              ) : (
+                <button
+                  onClick={() => deleteHandler(todo._id)}
+                  className={styles.delete}
+                >
+                  پاک کردن
                 </button>
               )}
             </div>

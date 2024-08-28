@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="fa" dir="rtl">
       <Head>
-        <title>todoApp</title>
         <link rel="icon" href="/icon.svg" type="image/x-icon" sizes="48x48" />
       </Head>
       <body>

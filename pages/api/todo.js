@@ -97,5 +97,20 @@ export default async function handler(req, res) {
           .json({ status: "success", message: "todos updated success" });
       }
     }
+  } else if (req.method === "DELETE") {
+    const { id } = req.body;
+    const user = await userModels.findOne({ userName: userName });
+    const filterTodos = user.todos.filter((todo) => todo.id !== id);
+    try {
+      user.todos = filterTodos;
+      user.save();
+      return res
+        .status(200)
+        .json({ status: "success", message: "todo deleted successfully :)" });
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ status: "failed", message: "todos not deleted  :)" });
+    }
   }
 }

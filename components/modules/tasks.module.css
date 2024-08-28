@@ -60,3 +60,11 @@
     background-color: #ffffff;
     border: 1px solid var(--error-color);
 }
+.delete{
+    background-color: #22333b;
+}
+.delete:hover{
+    color: #22333b;
+    background-color: #ffffff;
+    border: 1px solid #22333b;
+}

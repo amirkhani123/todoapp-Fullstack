@@ -4,7 +4,6 @@
     justify-content: center;
     flex-direction: column;
     height: calc(100vh - 300px );
-
 }
 .not_signin h2{
     font-size: 1.2rem;
@@ -25,10 +24,11 @@
     color: var(--first-color);
 }
 .container{
-   
     margin: 10px 15px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 .container >div{
@@ -70,4 +70,10 @@
     text-align: center;
     width: 100%;
     margin-top: 200px;
+}
+@media (max-width:598px) {
+    .container{
+        margin-right: 40px;
+    }
+    
 }
