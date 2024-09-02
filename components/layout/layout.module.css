@@ -7,6 +7,7 @@
      display: flex;
      align-items: center;
      justify-content: space-between;
+     z-index: 5;
 }
 .container header p{
     font-family: "vazirmatn";
@@ -103,23 +104,53 @@
     color: var(--first-color);
     background-color: #FFFFFF;
 }
-.menu svg{
+.headerRight button
+{
     display: none;
-    margin: 0 15px;
+}
+.menu{
+    position: absolute;
+    top: 65px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(65, 65, 65);
+    width: 230px;
+    height: 180px;
+    padding: 0 15px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgb(152, 152, 152);
+    animation: menuAnimation 0.33s linear ;
+}
+.menu li{
+    list-style: none;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 10px 0;
+
+}
+@keyframes menuAnimation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+    
 }
 @media(max-width:1083px) {
-    .menu svg{
-        display: inline-block;
-    }
-    .menu p {
-        display: none;
-    }
     .aside{
         display: none;
-        position: relative;
-        top: 0px;
-        left: 0px;
-        z-index: 2;
-        font-size: 10px;
+    }
+   
+    .headerRight button{
+        display: inline-block;
+        background-color: transparent;
+        border: none;
+        width: fit-content;
+        margin: 5px;
+        color: #ffffff;
+    }
+    .headerRight p{
+        display: none;
     }
 }

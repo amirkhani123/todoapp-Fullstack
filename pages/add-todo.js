@@ -10,3 +10,17 @@ function AddTodo() {
 }
 
 export default AddTodo;
+
+export async function getServerSideProps({ req }) {
+  const { token } = req.cookies;
+  if (!token) {
+    return {
+      redirect: { destination: "/auth/signin" },
+    };
+  }
+  return {
+    props: {
+      token,
+    },
+  };
+}
